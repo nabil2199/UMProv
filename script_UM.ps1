@@ -21,8 +21,11 @@ write-host "User count within CSV file=" $count
 
 ForEach ($user in $users) 
 {
-	Enable-UMMailbox -Identity $user.upn -UMMailboxPolicy "GenFrDialPlan" -Extensions $user.Extension
-	if ($?=$true){
-		write-host "UM enabled for user:" $user.upn
+    if ($user.VoiceMail -eq "Y")
+    {
+	    Enable-UMMailbox -Identity $user.upn -UMMailboxPolicy "GenFrDialPlan" -Extensions $user.Extension
+	    if ($? -eq $true){
+		    write-host "UM enabled for user:" $user.upn
+        }
 	}
 }
