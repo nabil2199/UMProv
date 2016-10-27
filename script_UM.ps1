@@ -15,17 +15,17 @@ param(
 #>
 
 $users = $null
-$users = Import-CSV C:\Users\NXLX8474\Desktop\users.csv
+$users = Import-Csv C:\Users\NXLX8474\Desktop\users.csv
 $count = $users.count
-write-host "User count within CSV file=" $count
+Write-Host "User count within CSV file=" $count
 
-ForEach ($user in $users) 
+foreach ($user in $users)
 {
-    if ($user.VoiceMail -eq "Y")
-    {
-	    Enable-UMMailbox -Identity $user.upn -UMMailboxPolicy "GenFrDialPlan" -Extensions $user.Extension
-	    if ($? -eq $true){
-		    write-host "UM enabled for user:" $user.upn
-        }
-	}
+  if ($user.VoiceMail -eq "Y")
+  {
+    Enable-UMMailbox -identity $user.upn -UMMailboxPolicy "GenFrDialPlan" -Extensions $user.Extension
+    if ($? -eq $true) {
+      Write-Host "UM enabled for user:" $user.upn
+    }
+  }
 }
