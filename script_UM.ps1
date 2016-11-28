@@ -15,6 +15,7 @@ foreach ($user in $users)
 {
   if ($user.VoiceMail -eq "Y")
   {
+    Set-Mailbox -Identity $user.upn -Languages fr-FR
     Enable-UMMailbox -identity $user.upn -UMMailboxPolicy $UMPolicy -Extensions $user.Extension
     if ($? -eq $true) {
       Write-Host "UM enabled for user:" $user.upn
